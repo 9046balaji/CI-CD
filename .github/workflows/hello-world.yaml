@@ -1,0 +1,21 @@
+name: Hello World
+
+on:
+  push:
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+      - uses: action/checkout@v3
+
+      - name: say hello
+        run: echo "Helllo World!"
+
+      - name: show content information
+        run: |
+          echo "Repository: ${{github.repository}}"
+          echo "Branch: ${{github.ref_name}}"
+          echo "Triggered by: ${{github.event_name}}"
+          echo "User: ${{github.actor}}"
