@@ -1,21 +1,32 @@
-name: Hello World
+name: Hello World Workflow
 
+# When should this workflow run?
+# These triggers respond to common development events
 on:
   push:
+  pull_request:
 
+# What work should be done?
+# Jobs run independently on separate virtual machines
 jobs:
   say-hello:
+    # Use Ubuntu Linux for consistency and tool availability
     runs-on: ubuntu-latest
+
+    # Steps execute sequentially within each job
     steps:
-      - name: get code
-      - uses: action/checkout@v3
+      # Download your repository's code into the virtual machine
+      - name: Get the code
+        uses: actions/checkout@v4
 
-      - name: say hello
-        run: echo "Helllo World!"
+      # Run commands just like you would locally
+      - name: Say hello
+        run: echo "Hello, GitHub Actions!"
 
-      - name: show content information
+      # Access information about this workflow run
+      - name: Show context information
         run: |
-          echo "Repository: ${{github.repository}}"
-          echo "Branch: ${{github.ref_name}}"
-          echo "Triggered by: ${{github.event_name}}"
-          echo "User: ${{github.actor}}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Triggered by: ${{ github.event_name }}"
+          echo "User: ${{ github.actor }}"
